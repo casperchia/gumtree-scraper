@@ -1,0 +1,15 @@
+{
+  "name": "gumtree-scraper",
+  "version": "1.0.0",
+  "description": "Gumtree scraper to retrieve new ads for football tickets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Casper Chia",
+  "license": "ISC",
+  "dependencies": {
+    "scrape-it": "^3.2.2"
+  }
+}

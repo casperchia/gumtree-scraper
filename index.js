@@ -51,6 +51,7 @@ function process(err, results) {
    } catch (err) {
       console.log(`Creating new file: ${filePath}`);
       jsonfile.writeFileSync(filePath, retrievedAds, {spaces: 2});
+      return;
    }
 
    // Find which ads are new

@@ -1,0 +1,7 @@
+{
+   "senderName": "John Doe",
+   "senderEmail": "john.doe@gmail.com",
+   "senderPassword": "password",
+   "recipients": "person.one@gmail.com, person.two@gmail.com, person.three@gmail.com",
+   "searchQuery": "Microwave Oven"
+}

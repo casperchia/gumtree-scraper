@@ -10,6 +10,8 @@
   "author": "Casper Chia",
   "license": "ISC",
   "dependencies": {
-    "scrape-it": "^3.2.2"
+    "jsonfile": "^2.4.0",
+    "scrape-it": "^3.2.2",
+    "sendmail": "^1.1.1"
   }
 }

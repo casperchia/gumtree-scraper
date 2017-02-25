@@ -2,9 +2,15 @@
  * Created by Casper on 23/02/2017.
  */
 
-const scrapeIt = require("scrape-it");
+"use strict";
 
-const url = 'http://www.gumtree.com.au/s-brazil+argentina/k0?fromSearchBox=true';
+const scrapeIt = require("scrape-it");
+const jsonfile = require("jsonfile");
+
+const filePath = './data.json'
+const searchQuery = 'brazil argentina'
+const url = `http://www.gumtree.com.au/s-${searchQuery}/k0`;
+
 // http://www.gumtree.com.au/s-brazil+argentina/page-2/k0?fromSearchBox=true
 
 var scrapeModel = {
@@ -30,10 +36,37 @@ var scrapeModel = {
    }
 }
 
-scrapeIt(url, scrapeModel, toDictionary);
+scrapeIt(url, scrapeModel, process);
 
-function toDictionary(err, results) {
+function process(err, results) {
+   var retrievedAds = toDictionary(results);
+   try {
+      var existingAds = jsonfile.readFileSync(filePath);
+   } catch (err) {
+      console.log(`Creating new file: ${filePath}`);
+      jsonfile.writeFileSync(filePath, retrievedAds, {spaces: 2});
+   }
+
+   // Find which ads are new
+   var newAds = {};
+   for (var id in retrievedAds) {
+      if (!(id in existingAds)) {
+         newAds[id] = retrievedAds[id];
+      }
+      // Update the existing ads
+      existingAds[id] = retrievedAds[id];
+   }
+
+   jsonfile.writeFileSync(filePath, existingAds, {spaces: 2});
+}
+
+function toDictionary(results) {
    var dict = {};
+
+   if (!results || !results.ads) {
+      return dict;
+   }
+
    results.ads.forEach(function (ad) {
       if (ad.id) {
          dict[ad.id] = {
@@ -43,5 +76,5 @@ function toDictionary(err, results) {
          }
       }
    })
-   console.log(dict);
+   return dict;
 }

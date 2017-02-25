@@ -7,6 +7,7 @@
 const scrapeIt = require("scrape-it");
 const jsonfile = require("jsonfile");
 const nodemailer = require("nodemailer");
+const schedule = require("node-schedule");
 const CONFIG = require("./config");
 
 const filePath = './data.json'
@@ -38,8 +39,10 @@ var scrapeModel = {
    }
 }
 
-console.log('Retrieving data...');
-scrapeIt(url, scrapeModel, process);
+schedule.scheduleJob(CONFIG.cronSchedule, () => {
+   console.log('Retrieving data...');
+   scrapeIt(url, scrapeModel, process);
+});
 
 function process(err, results) {
    var retrievedAds = toDictionary(results);

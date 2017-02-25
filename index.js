@@ -26,7 +26,8 @@ var scrapeModel = {
             selector: ".ad-listing__title",
          },
          price: {
-            selector: ".ad-listing__price"
+            selector: ".ad-listing__price",
+            convert: price => price || 'N/A'
          },
          url: {
             selector: ".ad-listing__watchlist.watchlist.j-watchlist",

@@ -7,7 +7,7 @@
 const scrapeIt = require("scrape-it");
 const jsonfile = require("jsonfile");
 const nodemailer = require("nodemailer");
-const CONFIG = require("./config.json");
+const CONFIG = require("./config");
 
 const filePath = './data.json'
 const searchQuery = CONFIG.searchQuery;
